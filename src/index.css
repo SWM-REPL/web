@@ -1,0 +1,16 @@
+@font-face {
+  font-family: 'NanumFlowerSmell';
+  src: url('../fonts/NanumFlowerSmell.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'NanumWarmFarewell';
+  src: url('../fonts/NanumWarmFarewell.ttf') format('truetype');
+}
+body {
+  font-family: 'NanumFlowerSmell', 'sans-serif';
+  background: #faebd7;
+
+  margin: 0;
+  padding: 0;
+}
