@@ -1,5 +1,8 @@
-import styled from 'styled-components';
+import React from 'react';
+
 import { Span, Input } from '../atoms';
+
+import styled from 'styled-components';
 
 const StyledFormField = styled.div`
   display: flex;

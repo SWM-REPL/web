@@ -1,8 +1,9 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
 
 import theme from './assets/styles/theme';
 import { SignIn } from './components/templates/signin';
+
+import { ThemeProvider } from 'styled-components';
 
 function App() {
   return (

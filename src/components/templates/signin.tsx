@@ -1,8 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import { Title, Link } from '../atoms';
 import { SignInForm } from '../organisms';
+
+import styled from 'styled-components';
 
 const StyledSignIn = styled.div`
   display: flex;

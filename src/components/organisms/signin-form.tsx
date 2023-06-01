@@ -1,8 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import { Button } from '../atoms';
 import { FormField } from '../molecules';
+
+import styled from 'styled-components';
 
 const StyledForm = styled.form`
   display: flex;
@@ -19,7 +20,10 @@ const FormFieldBox = styled.div`
 
 export function SignInForm() {
   return (
-    <StyledForm onSubmit={() => {}}>
+    <StyledForm
+      onSubmit={() => {
+        console.log('submitted');
+      }}>
       <FormFieldBox>
         <FormField label='아이디' type='text' name='username' />
         <FormField label='비밀번호' type='password' name='password' />

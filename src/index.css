@@ -1,12 +1,13 @@
 @font-face {
-  font-family: 'NanumFlowerSmell';
-  src: url('../fonts/NanumFlowerSmell.ttf') format('truetype');
+  font-family: 'NanumWarmFarewell';
+  src: url('./assets/fonts/NanumFairyClear.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'NanumWarmFarewell';
-  src: url('../fonts/NanumWarmFarewell.ttf') format('truetype');
+  font-family: 'NanumFlowerSmell';
+  src: url('./assets/fonts/NanumFlowerSmell.ttf') format('truetype');
 }
+
 body {
   font-family: 'NanumFlowerSmell', 'sans-serif';
   background: #faebd7;
