@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Title, Link } from '../atoms';
-import { SignInForm } from '../organisms';
-
 import styled from 'styled-components';
 
-const StyledSignIn = styled.div`
+import { Title } from '../atoms';
+import { SignUpForm } from '../organisms/signup-form';
+
+const StyledSignUp = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,16 +22,13 @@ const FormBox = styled.div`
   width: 100%;
 `;
 
-export function SignIn() {
+export function SignUp() {
   return (
-    <StyledSignIn>
-      <Title>로그인</Title>
+    <StyledSignUp>
+      <Title>회원가입</Title>
       <FormBox>
-        <SignInForm />
+        <SignUpForm />
       </FormBox>
-      <div>
-        계정이 없으시다면... <Link>만들러가기!</Link>
-      </div>
-    </StyledSignIn>
+    </StyledSignUp>
   );
 }

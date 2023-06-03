@@ -17,7 +17,7 @@ plugins:
 rules:
   import/order:
     - error
-    - groups: [builtin, external, [parent, sibling], index, object, type]
+    - groups: [builtin, external, internal]
       alphabetize: { order: 'asc', caseInsensitive: true }
       newlines-between: always
       pathGroups:
@@ -25,13 +25,12 @@ rules:
           group: external
           position: before
         - pattern: '{.,..}/**/*.{css,scss,sass}'
-          group: sibling
+          group: internal
           position: after
-        - pattern: '{.,..}/**/*.{svg,png,jpg,jpeg,gif}'
-          group: object
-          position: after
-      pathGroupsExcludedImportTypes: ['react']
+      pathGroupsExcludedImportTypes: ['react', 'react-dom']
 settings:
+  react:
+    version: detect
   import/resolver:
     typescript: true
     node: true
