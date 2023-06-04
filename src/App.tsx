@@ -4,16 +4,16 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import theme from './assets/styles/theme';
-import { SignIn } from './components/templates/signin';
-import { SignUp } from './components/templates/signup';
+import { RoutePaths } from './routes';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route path='/signin' element={<SignIn />} />
-          <Route path='/signup' element={<SignUp />} />
+          {Object.values(RoutePaths).map((route, index) => (
+            <Route key={index} {...route} />
+          ))}
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
