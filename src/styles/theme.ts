@@ -4,10 +4,10 @@ const font = {
 };
 
 const color = {
-  textPrimary: '#000000',
+  textPrimary: '#212322',
   textSecondary: '#75787b',
 
-  backgroundPrimary: '#ffffff',
+  backgroundPrimary: '#f4f7ff',
 
   highlightPrimary: '#fbeb70',
 };
