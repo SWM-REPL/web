@@ -2,6 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
+import { RoutePaths } from '../../routes';
 import { Title, Link } from '../atoms';
 import { SignInForm } from '../organisms';
 
@@ -30,7 +31,8 @@ export function SignIn() {
         <SignInForm />
       </FormBox>
       <div>
-        계정이 없으시다면... <Link>만들러가기!</Link>
+        계정이 없으시다면...{' '}
+        <Link to={RoutePaths.SignUp.path}>만들러가기!</Link>
       </div>
     </StyledSignIn>
   );
