@@ -1,4 +1,4 @@
-name: Deploy React server
+name: Deployer
 
 on:
   push:
@@ -16,11 +16,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Make private key file
+    - name: Create private key file
       shell: bash
       run: |
         PRIVATE_KEYFILE=$(mktemp)
-        echo '${{ secrets.OPENSSH_PRIVATE_KEY }} > $PRIVATE_KEYFILE
+        echo '${{ secrets.OPENSSH_PRIVATE_KEY }}' > $PRIVATE_KEYFILE
     - name: Pull repository
       shell: bash
       run: |
@@ -43,3 +43,7 @@ jobs:
           docker stop $CONTAINER_NAME
           docker run -d --rm --name $CONTAINER_NAME -v /etc/localtime:/etc/localtime:ro -p ${{ secrets.PUBLISH_PORT }}:3000 $IMAGE_NAME
         EOF
+    - name: Delete private key file
+      shell: bash
+      run: |
+        rm -rf $PRIVATE_KEYFILE
