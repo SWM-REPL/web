@@ -22,6 +22,7 @@ jobs:
     - name: Write SSH key
       shell: bash
       run : |
+        mkdir ~/.ssh
         echo '${{ secrets.SSH_PRIVATE_KEY }}' > $PRIVATE_KEYFILE
         echo '${{ secrets.SSH_KNOWN_HOSTS }}' > ~/.ssh/known_hosts
     - name: Pull repository
