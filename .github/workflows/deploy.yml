@@ -12,14 +12,13 @@ jobs:
     env:
       IMAGE_NAME: "replnote-web-image"
       CONTAINER_NAME: "replnote-web-container"
-      PRIVATE_KEYFILE: ""
     steps:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Create private key file
       shell: bash
       run: |
-        PRIVATE_KEYFILE=$(mktemp)
+        echo "PRIVATE_KEYFILE=$(mktemp)" >> $GITHUB_ENV
         echo '${{ secrets.OPENSSH_PRIVATE_KEY }}' > $PRIVATE_KEYFILE
     - name: Pull repository
       shell: bash
