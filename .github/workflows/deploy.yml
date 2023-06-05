@@ -1,4 +1,4 @@
-name: Deploy React Server
+name: Deploy React server
 
 on:
   push:
@@ -12,27 +12,33 @@ jobs:
     env:
       IMAGE_NAME: "replnote-web-image"
       CONTAINER_NAME: "replnote-web-container"
+      PRIVATE_KEYFILE: ""
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+    - name: Make private key file
+      shell: bash
+      run: |
+        PRIVATE_KEYFILE=$(mktemp)
+        echo '${{ secrets.OPENSSH_PRIVATE_KEY }} > $PRIVATE_KEYFILE
     - name: Pull repository
       shell: bash
       run: |
-        echo '${{ secrets.OPENSSH_PRIVATE_KEY }}' | ssh -i /dev/stdin ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} <<EOF
+        ssh -i $PRIVATE_KEYFILE ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} <<EOF
           cd ${{ secrets.SSH_PROJECT_DIRECTORY }}
           git pull origin main
         EOF
     - name: Build docker image
       shell: bash
       run: |
-        echo '${{ secrets.OPENSSH_PRIVATE_KEY }}' | ssh -i /dev/stdin ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} <<EOF
+        ssh -i $PRIVATE_KEYFILE ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} <<EOF
           cd ${{ secrets.SSH_PROJECT_DIRECTORY }}
           docker build -t $IMAGE_NAME .
         EOF
     - name: Run docker container
       shell: bash
       run: |
-        echo '${{ secrets.OPENSSH_PRIVATE_KEY }}' | ssh -i /dev/stdin ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} <<EOF
+        ssh -i $PRIVATE_KEYFILE ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} <<EOF
           cd ${{ secrets.SSH_PROJECT_DIRECTORY }}
           docker stop $CONTAINER_NAME
           docker run -d --rm --name $CONTAINER_NAME -v /etc/localtime:/etc/localtime:ro -p ${{ secrets.PUBLISH_PORT }}:3000 $IMAGE_NAME
