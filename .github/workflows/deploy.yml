@@ -23,8 +23,6 @@ jobs:
       shell: bash
       run : |
         echo -n '${{ secrets.OPENSSH_PRIVATE_KEY }}' > $PRIVATE_KEYFILE
-        sha256sum <<< '${{ secrets.OPENSSH_PRIVATE_KEY }}'
-        echo -n $PRIVATE_KEYFILE | sha256sum
     - name: Pull repository
       shell: bash
       run: |
