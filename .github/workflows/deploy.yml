@@ -19,6 +19,9 @@ jobs:
       shell: bash
       run: |
         echo "PRIVATE_KEYFILE=$(mktemp)" >> $GITHUB_ENV
+    - name: Write private key
+      shell: bash
+      run : |
         echo '${{ secrets.OPENSSH_PRIVATE_KEY }}' > $PRIVATE_KEYFILE
     - name: Pull repository
       shell: bash
