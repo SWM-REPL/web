@@ -1,3 +1,5 @@
+name: Deploy React Server
+
 on:
   push:
     branches:
@@ -16,22 +18,22 @@ jobs:
     - name: Pull repository
       shell: bash
       run: |
-        echo '${{ secrets.OPENSSH_PRIVATE_KEY }}' | ssh -i /dev/stdin ${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }} -p ${{ vars.SSH_PORT }} <<EOF
-          cd ${{ vars.SSH_PROJECT_DIRECTORY }}
+        echo '${{ secrets.OPENSSH_PRIVATE_KEY }}' | ssh -i /dev/stdin ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} <<EOF
+          cd ${{ secrets.SSH_PROJECT_DIRECTORY }}
           git pull origin main
         EOF
     - name: Build docker image
       shell: bash
       run: |
-        echo '${{ secrets.OPENSSH_PRIVATE_KEY }}' | ssh -i /dev/stdin ${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }} -p ${{ vars.SSH_PORT }} <<EOF
-          cd ${{ vars.SSH_PROJECT_DIRECTORY }}
+        echo '${{ secrets.OPENSSH_PRIVATE_KEY }}' | ssh -i /dev/stdin ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} <<EOF
+          cd ${{ secrets.SSH_PROJECT_DIRECTORY }}
           docker build -t $IMAGE_NAME .
         EOF
     - name: Run docker container
       shell: bash
       run: |
-        echo '${{ secrets.OPENSSH_PRIVATE_KEY }}' | ssh -i /dev/stdin ${{ vars.SSH_USERNAME }}@${{ vars.SSH_HOST }} -p ${{ vars.SSH_PORT }} <<EOF
-          cd ${{ vars.SSH_PROJECT_DIRECTORY }}
+        echo '${{ secrets.OPENSSH_PRIVATE_KEY }}' | ssh -i /dev/stdin ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} <<EOF
+          cd ${{ secrets.SSH_PROJECT_DIRECTORY }}
           docker stop $CONTAINER_NAME
-          docker run -d --rm --name $CONTAINER_NAME -v /etc/localtime:/etc/localtime:ro -p ${{ vars.PUBLISH_PORT }}:3000 $IMAGE_NAME
+          docker run -d --rm --name $CONTAINER_NAME -v /etc/localtime:/etc/localtime:ro -p ${{ secrets.PUBLISH_PORT }}:3000 $IMAGE_NAME
         EOF
