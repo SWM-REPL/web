@@ -22,7 +22,7 @@ jobs:
     - name: Write private key
       shell: bash
       run : |
-        echo '${{ secrets.OPENSSH_PRIVATE_KEY }}' > $PRIVATE_KEYFILE
+        echo -n '${{ secrets.OPENSSH_PRIVATE_KEY }}' > $PRIVATE_KEYFILE
         wc $PRIVATE_KEYFILE
     - name: Pull repository
       shell: bash
