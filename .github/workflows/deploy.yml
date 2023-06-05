@@ -14,16 +14,7 @@ jobs:
       CONTAINER_NAME: "replnote-web-container"
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
-    - name: Test private key
-      uses: appleboy/ssh-action@v0.1.10
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.OPENSSH_PRIVATE_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        script: |
-          echo "Hi"
+      uses: actions/checkout@v3
     - name: Create private key file
       shell: bash
       run: |
@@ -32,9 +23,11 @@ jobs:
       shell: bash
       run : |
         echo '${{ secrets.OPENSSH_PRIVATE_KEY }}' > $PRIVATE_KEYFILE
+        wc $PRIVATE_KEYFILE
     - name: Pull repository
       shell: bash
       run: |
+        wc $PRIVATE_KEYFILE
         ssh -i $PRIVATE_KEYFILE ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} <<EOF
           cd ${{ secrets.SSH_PROJECT_DIRECTORY }}
           git pull origin main
