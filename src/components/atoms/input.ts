@@ -12,7 +12,7 @@ export const Input = styled.input`
 
   box-sizing: border-box;
   width: 100%;
-  margin-top: 0.5rem;
+  height: 1.5rem;
 
   &:focus {
     border-bottom: 0.1rem solid ${({ theme }) => theme.textPrimary};

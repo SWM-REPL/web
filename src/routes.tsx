@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { SignIn } from './components/templates/signin';
-import { SignUp } from './components/templates/signup';
+import { SignIn, SignUp, TodoList } from './components/templates';
 
 interface RoutePath {
   path: string;
@@ -11,7 +10,7 @@ interface RoutePath {
 export const RoutePaths: Record<string, RoutePath> = {
   Home: {
     path: '/',
-    element: <div>Home</div>,
+    element: <TodoList />,
   },
   SignIn: {
     path: '/signin',
