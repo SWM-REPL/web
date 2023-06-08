@@ -1,0 +1,53 @@
+name: Deployer
+
+on:
+  push:
+    branches:
+    - main
+    
+jobs:
+  deployment:
+    name: "Deploy service via SSH"
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: "replnote-web-image"
+      CONTAINER_NAME: "replnote-web-container"
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Create private key file
+      shell: bash
+      run: |
+        echo "PRIVATE_KEYFILE=$(mktemp)" >> $GITHUB_ENV
+    - name: Write SSH key
+      shell: bash
+      run : |
+        mkdir ~/.ssh
+        echo '${{ secrets.SSH_PRIVATE_KEY }}' > $PRIVATE_KEYFILE
+        echo '${{ secrets.SSH_KNOWN_HOSTS }}' > ~/.ssh/known_hosts
+    - name: Pull repository
+      shell: bash
+      run: |
+        ssh -i $PRIVATE_KEYFILE ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} <<EOF
+          cd ${{ secrets.SSH_PROJECT_DIRECTORY }}
+          git pull origin main
+        EOF
+    - name: Build docker image
+      shell: bash
+      run: |
+        ssh -i $PRIVATE_KEYFILE ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} <<EOF
+          cd ${{ secrets.SSH_PROJECT_DIRECTORY }}
+          docker build -t $IMAGE_NAME .
+        EOF
+    - name: Run docker container
+      shell: bash
+      run: |
+        ssh -i $PRIVATE_KEYFILE ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} <<EOF
+          cd ${{ secrets.SSH_PROJECT_DIRECTORY }}
+          docker stop $CONTAINER_NAME
+          docker run -d --rm --name $CONTAINER_NAME -v /etc/localtime:/etc/localtime:ro -p ${{ secrets.PUBLISH_PORT }}:3000 $IMAGE_NAME
+        EOF
+    - name: Delete SSH key
+      shell: bash
+      run: |
+        rm -rf $PRIVATE_KEYFILE

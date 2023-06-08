@@ -1,0 +1,20 @@
+name: Builder
+
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - 'main'
+
+jobs:
+  build-test:
+    name: "Build test"
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Build test
+      shell: bash
+      run: |
+        docker build -t build-test .
