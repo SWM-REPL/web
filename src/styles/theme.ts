@@ -1,6 +1,6 @@
 const font = {
   fontMain: 'NanumFlowerSmell, sans-serif',
-  fontUser: 'NanumFairyClear, sans-serif',
+  fontUser: 'NanumWarmFarewell, sans-serif',
 };
 
 const color = {
@@ -8,10 +8,8 @@ const color = {
   textSecondary: '#75787b',
 
   backgroundPrimary: '#f4f7ff',
-  highlightPrimary: '#fbeb70',
 
-  borderPrimary: '#212322',
-  borderSecondary: '#75787b',
+  highlightPrimary: '#fbeb70',
 };
 
 export default {
