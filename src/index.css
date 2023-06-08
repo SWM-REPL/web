@@ -8,14 +8,9 @@
   src: url('./assets/fonts/NanumFlowerSmell.ttf') format('truetype');
 }
 
-html {
-  font-size: 16px; /* 1rem = 16px */
-}
-
 body {
   font-family: 'NanumFlowerSmell', 'sans-serif';
-  color: #212322;
-  background: #ede3d2;
+  background: #faebd7;
 
   margin: 0;
   padding: 0;
