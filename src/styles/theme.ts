@@ -7,7 +7,9 @@ const color = {
   textPrimary: '#212322',
   textSecondary: '#75787b',
 
-  backgroundPrimary: '#f4f7ff',
+  backgroundPrimary: '#EFEAD7',
+  backgroundSecondary: '#f4f7ff',
+
   highlightPrimary: '#fbeb70',
 
   borderPrimary: '#212322',
