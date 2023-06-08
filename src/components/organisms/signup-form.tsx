@@ -34,9 +34,7 @@ export function SignUpForm() {
           name='password-confirm'
         />
       </FormFieldBox>
-      <Button variant='primary' type='submit'>
-        회원가입하기
-      </Button>
+      <Button type='submit'>회원가입하기</Button>
     </StyledForm>
   );
 }
