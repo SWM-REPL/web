@@ -6,7 +6,7 @@ interface ButtonProps {
 
 export const Button = styled.button<ButtonProps>`
   background: ${({ variant, theme }) =>
-    variant === 'primary' ? theme.highlightPrimary : theme.backgroundSecondary};
+    variant === 'primary' ? theme.highlightPrimary : theme.highlightSecondary};
   color: black;
   padding: 1rem;
   font-family: ${({ theme }) => theme.fontMain};
