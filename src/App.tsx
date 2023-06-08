@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { ThemeProvider } from 'styled-components';
 
+import theme from './assets/styles/theme';
 import { RoutePaths } from './routes';
-import theme from './styles/theme';
 
 function App() {
   return (
