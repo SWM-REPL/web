@@ -28,7 +28,9 @@ export function SignInForm() {
         <FormField label='아이디' type='text' name='username' />
         <FormField label='비밀번호' type='password' name='password' />
       </FormFieldBox>
-      <Button type='submit'>로그인하기</Button>
+      <Button variant='primary' type='submit'>
+        로그인하기
+      </Button>
     </StyledForm>
   );
 }
