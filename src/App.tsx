@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { RoutePaths } from './routes';
+import { Routes as RoutePaths } from './routes';
 
 function App() {
   return (

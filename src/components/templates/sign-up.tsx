@@ -1,7 +1,9 @@
 import React from 'react';
+import { UseFormReturn } from 'react-hook-form';
 
 import styled from 'styled-components';
 
+import { SignUpApiProps } from '../../apis/user/signup';
 import { Title } from '../atoms';
 import { SignUpForm } from '../organisms/signup-form';
 
@@ -22,12 +24,16 @@ const FormBox = styled.div`
   width: 100%;
 `;
 
-export function SignUp() {
+interface SignUpProps {
+  formData: UseFormReturn<SignUpApiProps>;
+}
+
+export function SignUp({ formData }: SignUpProps) {
   return (
     <StyledSignUp>
       <Title>회원가입</Title>
       <FormBox>
-        <SignUpForm />
+        <SignUpForm formData={formData} />
       </FormBox>
     </StyledSignUp>
   );

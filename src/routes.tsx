@@ -1,23 +1,27 @@
 import React from 'react';
+import { RouteProps } from 'react-router-dom';
 
-import { SignIn, SignUp, TodoList } from './components/templates';
+import { SignInPage, SignUpPage } from './components/pages';
+import { GroupList } from './components/templates/group-list';
+import { TodoList } from './components/templates/todo-list';
 
-interface RoutePath {
-  path: string;
-  element: JSX.Element;
-}
+type Route = Omit<RouteProps, 'path' | 'index'> & { path: string };
 
-export const RoutePaths: Record<string, RoutePath> = {
+export const Routes: Record<string, Route> = {
   Home: {
     path: '/',
-    element: <TodoList />,
+    element: <GroupList />,
   },
   SignIn: {
     path: '/signin',
-    element: <SignIn />,
+    element: <SignInPage />,
   },
   SignUp: {
     path: '/signup',
-    element: <SignUp />,
+    element: <SignUpPage />,
+  },
+  TodoList: {
+    path: '/todo-list',
+    element: <TodoList />,
   },
 };

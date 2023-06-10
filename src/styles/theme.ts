@@ -11,12 +11,15 @@ const color = {
   backgroundSecondary: '#f4f7ff',
 
   highlightPrimary: '#fbeb70',
+};
 
-  borderPrimary: '#212322',
-  borderSecondary: '#75787b',
+const border = {
+  radius: '0.5rem',
+  color: '#212322',
 };
 
 export default {
+  border,
   ...color,
   ...font,
 };

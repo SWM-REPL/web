@@ -13,14 +13,14 @@ const StyledCheckbox = styled.input`
     display: inline-block;
     width: 1.5rem;
     height: 1.5rem;
-    box-shadow: 0 0 0 1px ${({ theme }) => theme.borderPrimary} inset;
+    box-shadow: 0 0 0 1px ${({ theme }) => theme.border.color} inset;
     border-radius: 50%;
     background-color: ${({ theme }) => theme.backgroundPrimary};
   }
 
   &:checked + label {
     background-image: url(${Check});
-    background-color: ${({ theme }) => theme.borderSecondary};
+    background-color: ${({ theme }) => theme.textSecondary};
   }
 `;
 

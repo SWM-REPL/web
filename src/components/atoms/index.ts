@@ -1,7 +1,9 @@
 export { Button } from './button';
 export { Checkbox } from './checkbox';
-export { Title } from './title';
-export { Span } from './span';
+export { CirclePicture } from './circle-picture';
 export { Input } from './input';
 export { Link } from './link';
 export { More } from './more';
+export { NoteTitle } from './note-title';
+export { Span } from './span';
+export { Title } from './title';

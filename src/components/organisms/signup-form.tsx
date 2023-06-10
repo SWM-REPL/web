@@ -1,7 +1,10 @@
 import React from 'react';
+import { UseFormReturn } from 'react-hook-form';
 
 import styled from 'styled-components';
 
+import { SignUpApiProps } from '../../apis/user/signup';
+import { useAuth } from '../../hooks/useAuth';
 import { Button } from '../atoms';
 import { FormField } from '../molecules';
 
@@ -18,20 +21,47 @@ const FormFieldBox = styled.div`
   box-sizing: border-box;
 `;
 
-export function SignUpForm() {
+interface SignUpFormProps {
+  formData: UseFormReturn<SignUpApiProps>;
+}
+
+export function SignUpForm({ formData }: SignUpFormProps) {
+  const { signUp } = useAuth();
+  const { handleSubmit, register } = formData;
+
   return (
-    <StyledForm
-      onSubmit={() => {
-        console.log('submitted');
-      }}>
+    <StyledForm onSubmit={handleSubmit(signUp)}>
       <FormFieldBox>
-        <FormField label='이름' type='text' name='nickname' />
-        <FormField label='아이디' type='text' name='username' />
-        <FormField label='비밀번호' type='password' name='password' />
+        <FormField
+          label='이름'
+          name='name'
+          register={register}
+          options={{ required: true }}
+          type='text'
+        />
+        <FormField
+          label='아이디'
+          name='username'
+          register={register}
+          options={{ required: true }}
+          type='text'
+        />
+        <FormField
+          label='비밀번호'
+          name='password'
+          register={register}
+          options={{ required: true }}
+          type='password'
+        />
         <FormField
           label='비밀번호 확인'
+          name='passwordConfirm'
+          register={register}
+          options={{
+            required: true,
+            validate: (value, formValue) => value === formValue.password,
+          }}
           type='password'
-          name='password-confirm'
         />
       </FormFieldBox>
       <Button variant='primary' type='submit'>

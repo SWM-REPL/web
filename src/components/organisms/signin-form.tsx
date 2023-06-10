@@ -1,7 +1,10 @@
 import React from 'react';
+import { UseFormReturn } from 'react-hook-form';
 
 import styled from 'styled-components';
 
+import { SignInApiProps } from '../../apis/user/signin';
+import { useAuth } from '../../hooks/useAuth';
 import { Button } from '../atoms';
 import { FormField } from '../molecules';
 
@@ -18,15 +21,30 @@ const FormFieldBox = styled.div`
   box-sizing: border-box;
 `;
 
-export function SignInForm() {
+interface SignInFormProps {
+  formData: UseFormReturn<SignInApiProps>;
+}
+
+export function SignInForm({ formData }: SignInFormProps) {
+  const { signIn } = useAuth();
+  const { handleSubmit, register } = formData;
   return (
-    <StyledForm
-      onSubmit={() => {
-        console.log('submitted');
-      }}>
+    <StyledForm onSubmit={handleSubmit(signIn)}>
       <FormFieldBox>
-        <FormField label='아이디' type='text' name='username' />
-        <FormField label='비밀번호' type='password' name='password' />
+        <FormField
+          label='아이디'
+          name='username'
+          register={register}
+          options={{ required: true }}
+          type='text'
+        />
+        <FormField
+          label='비밀번호'
+          name='password'
+          register={register}
+          options={{ required: true }}
+          type='password'
+        />
       </FormFieldBox>
       <Button variant='primary' type='submit'>
         로그인하기

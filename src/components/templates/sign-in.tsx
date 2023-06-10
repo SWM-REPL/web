@@ -1,8 +1,10 @@
 import React from 'react';
+import { UseFormReturn } from 'react-hook-form';
 
 import styled from 'styled-components';
 
-import { RoutePaths } from '../../routes';
+import { SignInApiProps } from '../../apis/user/signin';
+import { Routes } from '../../routes';
 import { Title, Link } from '../atoms';
 import { SignInForm } from '../organisms';
 
@@ -23,16 +25,20 @@ const FormBox = styled.div`
   width: 100%;
 `;
 
-export function SignIn() {
+interface SignInProps {
+  formData: UseFormReturn<SignInApiProps>;
+}
+
+export function SignIn({ formData }: SignInProps) {
   return (
     <StyledSignIn>
       <Title>로그인</Title>
       <FormBox>
-        <SignInForm />
+        <SignInForm formData={formData} />
       </FormBox>
       <div>
         계정이 없으시다면...{' '}
-        <Link to={RoutePaths.SignUp.path}>만들러가기!</Link>
+        <Link to={Routes.SignUp.path ?? ''}>만들러가기!</Link>
       </div>
     </StyledSignIn>
   );
